@@ -1,0 +1,11 @@
+uwsgi
+flask
+numpy
+scipy
+pandas
+scikit-learn
+tensorflow
+keras
+nltk
+gensim
+jsonify
