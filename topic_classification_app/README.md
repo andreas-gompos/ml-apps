@@ -9,6 +9,7 @@ In this project a topic classification app was created. More specifically an LST
 1.  Option 1 
 
 You can build and run the app using the following commands:
+
     * `docker build -t topic_classification_image_app .`
     * `docker container run -p 5000:5000 --rm -it --name topic_classification_container_app topic_classification_image_app`
     
@@ -17,6 +18,7 @@ You can build and run the app using the following commands:
 2.  Option 2
 
 You can pull and run the image from [Docker Hub](https://hub.docker.com/r/datagusto/topic_classification/) directly. Simply run:
+
     * `docker container run --rm  -p 5000:5000 -d --name flask_app_container datagusto/topic_classification`
 
 
