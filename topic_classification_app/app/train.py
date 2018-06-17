@@ -8,39 +8,41 @@ from keras.utils.np_utils import to_categorical
 import os
 
 from dependencies import *
-
 np.random.seed(7)
+
+bbc_data_dir = "../data/"
+glove_embedding_dir = "../glove.6B.300d.txt"
 
 
 # In[2]:
 
 
-def load_dataset():
+def load_dataset(directory=bbc_data_dir):
     df = pd.DataFrame()
     summ = 0
-    classes = os.listdir("../data/")
+    classes = os.listdir(directory)
 
     print("Loading:")
     for class_ in classes:
-        current_class_directory = "../data/{}/".format(class_)
+        current_class_directory = "{}{}/".format(directory, class_)
         print(current_class_directory)
 
         for name in sorted(os.listdir(current_class_directory)):
             path = os.path.join(current_class_directory, name)
 
-            current_text = open(path)
+            current_text = open(path, encoding = "ISO-8859-1")
             summ += 1
             df.loc[summ,"text"] = current_text.read()
             df.loc[summ,"class"] = class_
 
                       
     df["class_meaning"] = df["class"]      
-    df["class"].replace({"business":0,                             "entertainment":1,                             "politics":2,                             "sport":3,                             "tech":4},inplace=True)
+    df["class"].replace({"business":0, "entertainment":1, "politics":2, "sport":3, "tech":4}, inplace=True)
     return df
 
 
 data = load_dataset()
-data = data.sample(frac=1,random_state=25)
+data = data.sample(frac=1,  random_state=25)
 
 
 # In[ ]:
@@ -63,7 +65,7 @@ y_train = to_categorical(data["class"])
 # build keras model
 
 glove_embeddings = {}
-f = open("../glove.6B.300d.txt")
+f = open(glove_embedding_dir)
 for line in f:
     values = line.split()
     word = values[0]
@@ -84,7 +86,7 @@ for word, i in word_index.items():
 
 
 model = Sequential()
-model.add(Embedding(np.shape(embedding_matrix)[0],                    np.shape(embedding_matrix)[1],                    weights=[embedding_matrix],                    trainable=True))
+model.add(Embedding(np.shape(embedding_matrix)[0], np.shape(embedding_matrix)[1], weights=[embedding_matrix], trainable=True))
 model.add(LSTM(100))
 model.add(Dense(70, activation='relu'))
 model.add(Dropout(rate=0.25))

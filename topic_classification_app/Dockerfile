@@ -4,7 +4,13 @@ RUN apt-get update -y \
  && apt-get install -y \
     zip
 
-COPY ./data ./data
+RUN wget http://mlg.ucd.ie/files/datasets/bbc-fulltext.zip \
+ && unzip bbc-fulltext.zip -d ./data \
+ && cp -r ./data/bbc/* ./data \
+ && rm -r ./data/bbc/ \
+ && rm ./data/README.TXT \
+ && rm bbc-fulltext.zip
+
 RUN wget http://nlp.stanford.edu/data/glove.6B.zip \
  && unzip -j glove.6B.zip glove.6B.300d.txt -d . \
  && rm glove.6B.zip

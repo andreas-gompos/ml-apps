@@ -10,6 +10,7 @@ In this project a topic classification app was created. More specifically an LST
 You can build and run the app using the following commands:
     * `docker build -t topic_classification_image_app .`
     * `docker container run -p 5000:5000 --rm -it --name topic_classification_container_app topic_classification_image_app`
+    
     Note that you can use the provided Makefile to run the command `make deploy`, which will run the above commands for you.
 
 2.  Option 2
