@@ -111,4 +111,3 @@ model.fit(X_train, y_train, epochs=20, batch_size=128, shuffle=True)
 
 model.save("./artifacts/model")
 joblib.dump(preprocessing_pipeline, './artifacts/preprocessing_pipeline.pkl') 
-
