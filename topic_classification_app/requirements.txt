@@ -10,3 +10,5 @@ nltk
 gensim
 jsonify
 sanic
+sanic-cors
+flask-cors

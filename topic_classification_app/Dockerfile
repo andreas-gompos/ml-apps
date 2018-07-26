@@ -37,4 +37,4 @@ COPY --from=base /root/nltk_data /root/nltk_data
 COPY --from=base /usr/src/app /usr/src/app
 
 WORKDIR /usr/src/app
-CMD . ../venv/bin/activate && python main.py
+CMD . ../venv/bin/activate && python flask_main.py

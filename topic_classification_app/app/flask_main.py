@@ -1,15 +1,14 @@
-from sanic import Sanic, request
-from sanic.response import json
-from sanic_cors import CORS, cross_origin
+from flask import Flask, request, render_template, jsonify	
 from dependencies import *
+from flask_cors import CORS
 
-app = Sanic()
+app = Flask(__name__)
 CORS(app)
 
 @app.route("/", methods=['POST'])
-async def predict(request):
+def predict():
 
-    incoming_request = request.json
+    incoming_request = request.get_json()
     processed_text = preprocessing_pipeline.transform(incoming_request['text'])
     probas = model.predict_proba(processed_text, verbose=0) * 100
     
@@ -19,7 +18,7 @@ async def predict(request):
                       'sport': str(probas[0][3]),
                       'tech': str(probas[0][4])}
 
-    return json(model_response)
+    return jsonify(model_response)
 
 if __name__ == "__main__":
 
@@ -31,4 +30,4 @@ if __name__ == "__main__":
     test_probas = model.predict_proba(test_processed_text, verbose=0) * 100
     print('server is up')
 
-    app.run(host="0.0.0.0", port=5000, workers=1)
+    app.run(host="0.0.0.0", port=5000)
