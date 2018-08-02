@@ -10,8 +10,8 @@ import os
 from dependencies import *
 np.random.seed(7)
 
-bbc_data_dir = "../data/"
-glove_embedding_dir = "../glove.6B.300d.txt"
+bbc_data_dir = "./data/"
+glove_embedding_dir = "./glove.6B.300d.txt"
 
 
 # In[2]:
@@ -35,8 +35,8 @@ def load_dataset(directory=bbc_data_dir):
             df.loc[summ,"text"] = current_text.read()
             df.loc[summ,"class"] = class_
 
-                      
-    df["class_meaning"] = df["class"]      
+
+    df["class_meaning"] = df["class"]
     df["class"].replace({"business":0, "entertainment":1, "politics":2, "sport":3, "tech":4}, inplace=True)
     return df
 
@@ -78,7 +78,7 @@ embedding_dim = len(glove_embeddings['yes']) #=300
 embedding_matrix = np.zeros((len(word_index) + 1, embedding_dim))
 for word, i in word_index.items():
     embedding_vector = glove_embeddings.get(word)
-    
+
     if embedding_vector is not None:
         # words not found in embedding index will be all-zeros.
         embedding_matrix[i] = embedding_vector
@@ -110,4 +110,4 @@ model.fit(X_train, y_train, epochs=20, batch_size=128, shuffle=True)
 
 
 model.save("./artifacts/model")
-joblib.dump(preprocessing_pipeline, './artifacts/preprocessing_pipeline.pkl') 
+joblib.dump(preprocessing_pipeline, './artifacts/preprocessing_pipeline.pkl')

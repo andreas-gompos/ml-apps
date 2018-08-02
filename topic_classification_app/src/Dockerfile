@@ -20,21 +20,23 @@ RUN python -m venv ./venv \
  && . ./venv/bin/activate \
  && pip install -U pip \
  && pip install -r requirements.txt \
- && python -m nltk.downloader stopwords punkt wordnet
+ && python -m nltk.downloader stopwords punkt wordnet \
+ && mkdir ./artifacts \
+ && pip freeze > ./artifacts/requirements.txt
 
-COPY ./app ./app
-RUN pip freeze > ./app/artifacts/requirements.txt
+COPY ./dependencies.py ./dependencies.py
+COPY ./train.py ./train.py
+RUN . ./venv/bin/activate && python ./train.py
 
-WORKDIR /usr/src/app
-RUN . ../venv/bin/activate \
- && python ./train.py
+COPY ./main.py ./main.py
 
-
-FROM python:3.6.5 
+FROM python:3.6.5
 WORKDIR /usr/src/
+
 COPY --from=base /usr/src/venv /usr/src/venv
 COPY --from=base /root/nltk_data /root/nltk_data
-COPY --from=base /usr/src/app /usr/src/app
+COPY --from=base /usr/src/dependencies.py /usr/src/dependencies.py
+COPY --from=base /usr/src/artifacts /usr/src/artifacts
+COPY --from=base /usr/src/main.py /usr/src/main.py
 
-WORKDIR /usr/src/app
-CMD . ../venv/bin/activate && python flask_main.py
+CMD . ./venv/bin/activate && python main.py
