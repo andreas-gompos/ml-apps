@@ -15,13 +15,20 @@ async def predict(request):
 
     incoming_request = request.json
     processed_text = preprocessing_pipeline.transform(incoming_request['text'])
-    probas = model.predict_proba(processed_text, verbose=0) * 100
 
-    model_response = {'business': str(probas[0][0]),
-                      'entertainment': str(probas[0][1]),
-                      'politics': str(probas[0][2]),
-                      'sport': str(probas[0][3]),
-                      'tech': str(probas[0][4])}
+    if np.count_nonzero(processed_text) == 0:
+        model_response = {'business': str(0),
+                          'entertainment': str(0),
+                          'politics': str(0),
+                          'sport': str(0),
+                          'tech': str(0)}
+    else:
+        probas = model.predict_proba(processed_text, verbose=0) * 100
+        model_response = {'business': str(probas[0][0]),
+                          'entertainment': str(probas[0][1]),
+                          'politics': str(probas[0][2]),
+                          'sport': str(probas[0][3]),
+                          'tech': str(probas[0][4])}
 
     return json(model_response)
 
