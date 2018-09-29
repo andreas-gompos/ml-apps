@@ -24,5 +24,7 @@ In this project a topic classification app was created. More specifically an LST
     {"text":"made with love"}
     
 
+
+
 Any feedback is welcome! :)
 [LinkedIn](https://www.linkedin.com/in/andreas-gompos/)
