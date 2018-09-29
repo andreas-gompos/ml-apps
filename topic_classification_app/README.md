@@ -10,15 +10,15 @@ In this project a topic classification app was created. More specifically an LST
 
       a.   Build docker image locally
 
-          1. `git clone git@github.com:andreas-gompos/ml-apps.git`
-          2. `cd ./ml-apps/topic_classification_app/src`
-          3. `docker build -t topic_classification_image_app .`
-          4. `docker container run --rm -it -p 5000:5000 topic_classification_image_app`
+          1. git clone git@github.com:andreas-gompos/ml-apps.git
+          2. cd ./ml-apps/topic_classification_app/src
+          3. docker build -t topic_classification_image_app .
+          4. docker container run --rm -it -p 5000:5000 topic_classification_image_app
     
     
       b.   Run container directly from [Docker Hub](https://hub.docker.com/r/datagusto/topic_classification_app/)
       
-          1. `docker container run --rm -it -p 5000:5000 datagusto/topic_classification_app`
+          1. docker container run --rm -it -p 5000:5000 datagusto/topic_classification_app
       
       
 2.  Post a json file of the following format to localhost:5000.
