@@ -2,7 +2,7 @@ In this project a topic classification app was created. More specifically an LST
 
 **Requirements**
 
-* [Docker](https://docs.docker.com/install/)
+* You need to have [Docker](https://docs.docker.com/install/) installed.
 
 **Run the app**
 
