@@ -15,6 +15,7 @@ In this project a topic classification app was created. More specifically an LST
     
     
       b.   Run container directly from [Docker Hub](https://hub.docker.com/r/datagusto/topic_classification_app/)
+      
           1. `docker container run --rm -it -p 5000:5000 datagusto/topic_classification_app`
       
       
