@@ -1,4 +1,4 @@
-In this project a topic classification app was created. More specifically an LSTM network was trained to distinguish between 5 different categories of articles (business, entertainment, politics, sport, tech) and a minimal Flask API was created to serve that app. The dataset used, for training the network, was the [BBC articles dataset](http://mlg.ucd.ie/files/datasets/bbc-fulltext.zip), which consists of 2225 documents, from the BBC news website corresponding to stories from 2004-2005.
+In this project a topic classification app was created. More specifically an LSTM network was trained to distinguish between 5 different categories of articles (business, entertainment, politics, sport, tech) and a minimal Sanic API was created to serve the app. The dataset used, for training the network, was the [BBC articles dataset](http://mlg.ucd.ie/files/datasets/bbc-fulltext.zip), which consists of 2225 documents, from the BBC news website corresponding to stories from 2004-2005.
 
 **Requirements**
 
@@ -6,23 +6,21 @@ In this project a topic classification app was created. More specifically an LST
 
 **Run the app**
 
-1.  Option 1 
+1.  Run the containerised app by doing either a or b.
 
-You can build and run the app using the following commands:
+      a.   Build docker image locally
 
-    * `docker build -t topic_classification_image_app .`
-    * `docker container run -p 5000:5000 --rm -it --name topic_classification_container_app topic_classification_image_app`
+          1. `docker build -t topic_classification_image_app .`
+          2. `docker container run --rm -it -p 5000:5000 topic_classification_image_app`
     
-    Note that you can use the provided Makefile to run the command `make deploy`, which will run the above commands for you.
-
-2.  Option 2
-
-You can pull and run the image from [Docker Hub](https://hub.docker.com/r/datagusto/topic_classification/) directly. Simply run:
-
-    * `docker container run --rm  -p 5000:5000 -d --name flask_app_container datagusto/topic_classification`
-
-
-3.The app should is now reachable on `localhost:5000/predict`.
+    
+      b.   Run container directly from [Docker Hub](https://hub.docker.com/r/datagusto/topic_classification_app/)
+          1. `docker container run --rm -it -p 5000:5000 datagusto/topic_classification_app`
+      
+      
+2.  Post a json file of the following format to localhost:5000.
+    {"text":"made with love"}
+    
 
 Any feedback is welcome! :)
 [LinkedIn](https://www.linkedin.com/in/andreas-gompos/)
