@@ -20,6 +20,7 @@ In this project a topic classification app was created. More specifically an LST
       
       
 2.  Post a json file of the following format to localhost:5000.
+
     {"text":"made with love"}
     
 
